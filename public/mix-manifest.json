@@ -1,0 +1,9 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/lumx/moment-with-locales.js": "/js/lumx/moment-with-locales.js",
+    "/js/lumx/velocity.js": "/js/lumx/velocity.js",
+    "/js/lumx/lumx.js": "/js/lumx/lumx.js",
+    "/js/lumx/jquery.js": "/js/lumx/jquery.js",
+    "/js/lumx/angular.js": "/js/lumx/angular.js"
+}

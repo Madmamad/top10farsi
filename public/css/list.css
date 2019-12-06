@@ -1,0 +1,342 @@
+/* font-Gandom */
+  @font-face {
+      font-family: Gandom;
+      src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot');
+      src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot?#iefix') format('embedded-opentype'),
+           url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.woff') format('woff'),
+           url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.ttf') format('truetype');
+      font-weight: normal;
+    }
+
+.gandom {
+  font-family: Gandom;
+  font-size: 14px;
+}
+html{
+box-sizing:border-box;
+padding: 0;
+background-color: black;
+}
+
+*,*:after,*:before{
+box-sizing:inherit;
+}
+
+/*navbar*/
+#navbarred{
+  /* background-color: #ff2845; */
+  background-color: #7d0b73;
+}
+#search{
+  direction: ltr;
+}
+
+  .page{
+    /* background-color: #3b004d; */
+    background-color: black;
+    height: auto;
+    font-family: Gandom;
+    color: white;
+  }
+
+  .material-box{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  .material-box:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+
+  .hidden{
+    display: none;
+  }
+.tabC{
+  color: black;
+}
+
+/* toptenlist */
+.toptenlist{
+}
+.list-info{
+  background: white;
+  border-radius: 8px;
+  color: black;
+}
+.whole{
+  width: 100%;
+}
+
+/* toptenitem */
+.toptenitem{
+  height: auto;
+  width: 100%;
+  border-top: 1px solid gray;
+  border-radius: 8px;
+  margin-bottom: 1px;
+  background-color: white;
+  color: black;
+}
+.toptenitempic{
+  max-height: 100%;
+  max-width: 100%;
+}
+.toptenitemimage{
+  max-height: 30vh;
+  min-width: 15vw;
+  border-radius: 6px;
+}
+.itemPicColumn{
+  height: 100%;
+  width: 100%;
+}
+.toptenitemdesc{
+  overflow-y: scroll;
+  height: 24vh;
+  border-bottom: 1px solid gray;
+}
+.cm-section{
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+.vote-section{
+  height: 6vh;
+  display: inline-block;
+  width: 23%;
+}
+.input-group{
+  height: 6vh;
+  display: inline-block;
+  width: 76%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 !important;
+}
+.myForm{
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.inputcm{
+  width: 90% !important;
+  height: 100% !important;
+  display: inline-block !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  /* width: 74%;
+  height: 100%;
+  display: inline-block;
+  margin: 0 !important;
+  vertical-align: top; */
+  direction: rtl !important;
+  text-align: right !important;
+  float: right !important;
+}
+.submit-cm{
+  width: 10% !important;
+  height: 100% !important;
+  display: inline-block !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  float: left !important;
+  background: linear-gradient(135deg, #230047, #0d0029) !important;
+}
+.cmroll{
+  clear:both;
+  width: 100%;
+}
+.vote{
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.user-cred{
+  height: 10%;
+  width: 15%;
+}
+.userpic{
+  border-radius: 50%;
+  height: 4vh;
+  width: auto;
+}
+.cmwhole{
+    border-bottom: 1px gray solid;
+}
+.cmbody{
+  width: 85%;
+}
+.cmcontent{
+}
+.cmtool{
+  width: 10%;
+  float: left;
+}
+.like{
+  display: inline-block;
+  float: right;
+}
+.edit{
+  display: inline-block;
+  float: left;
+}
+/* button */
+.plus{
+  /* background: linear-gradient(135deg, #1ca102, #18cc24); */
+  background: linear-gradient(135deg, #e8e8e8, #c9c9c9);
+}
+.minus{
+  background: linear-gradient(135deg, #ad0303, #ed0202);
+}
+.likebtn{
+width: 60%;
+}
+.deletebtn{
+min-width: 38%;
+}
+.editbtn{
+  color: white;
+  background: green;
+}
+.commentbuttonicon{
+  height: 5px;
+  width: 5px;
+}
+.cm-section .button {
+  border: none;
+  width: 35%;
+  height: 100%;
+  /* padding: 20px; */
+  display: inline-block;
+  color: #F2070B;
+  font-size: 14px;
+  text-align: left;
+  border-radius: 5px;
+  text-shadow: 0 0 10px rgba(181, 26, 30, 0.4);
+  box-shadow: 0px 2px 5px rgba(28, 28, 28, 0.9);
+}
+.cm-section .button span {
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 12px;
+  text-shadow: none;
+}
+.cm-section .button:hover {
+  /* background: linear-gradient(-45deg, #292929, #191919); */
+  /* background: #8D58DA; */
+  background: black;
+  color: #fff;
+  box-shadow: inset 0px 0px 30px rgba(28, 28, 28, 0.9);
+}
+.cm-section .button.active {
+  /* background: #B51A1E; */
+  background: black;
+  color: #fff;
+  box-shadow: inset 0px 0px 30px rgba(28, 28, 28, 0.9);
+}
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  box-shadow: inset 0 0 5px #d4d4d4;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 4px;
+}
+/* .round-button{
+  min-width: 30px;
+  max-width:60px;
+  height: 50%;
+  text-decoration: none;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  border-style: none;
+  color: white;
+  background-color: #3498db;
+  border-radius: 100%;
+  overflow: none;
+  text-align: center;
+  padding:0;
+}
+.round-button:before {
+  content:'';
+  display:inline-block;;
+  vertical-align:middle;
+  padding-top:100%;
+}
+.btnspan {
+  display:inline-block;
+  vertical-align:middle;
+  max-width:90%;
+}
+.round-button:active{
+  background-color: #2980b9;
+}
+/*rep*/
+/* .report{
+width: 100%;
+height: 100%;
+}
+.reportButton{
+width: 100%;
+height: 100%;
+}
+.myRepBtn{
+  position: static;
+} */
+/* Style buttons */
+.info{
+  width: 100%;
+}
+.btn-label {
+  float: right;
+  width: 20%;
+}
+.btn-labeled {
+  font-size: 14px;
+min-width: 14vw;
+height: 6vh;
+}
+.title{
+  font-size: 24px;
+  font-weight: bold;
+}
+.btntxt{
+  font-family: Gandom;
+  font-size: 10px;
+  color: white;
+}
+/* left */
+.leftnav{
+  background-color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.left-nav-extended{
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: black;
+}
