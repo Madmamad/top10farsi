@@ -30,6 +30,7 @@ class CommentController extends Controller
           $data->content = $request->content;
           $data->item_id = $request->item;
           $data->user_id = $user->id;
+          $data->user_name=$user->name;
 
           if ($data->save()) {
               return response()->json(['success'=>"yes",'cmid'=>$data->id]);

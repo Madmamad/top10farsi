@@ -25,15 +25,23 @@ box-sizing:inherit;
 /*navbar*/
 #navbarred{
   /* background-color: #ff2845; */
-  background-color: #7d0b73;
+  background-color: #563D7C;
 }
-#search{
-  direction: ltr;
+.navbar-user-pic{
+  height: 5vh;
+  border-radius: 50%;
+}
+.navbar-user-name{
+  color: white;
+}
+.no-float{
+  float: none;
 }
 
   .page{
     /* background-color: #3b004d; */
-    background-color: black;
+    /* background-color: #150d29; */
+    background-color: #cfcfcf;
     height: auto;
     font-family: Gandom;
     color: white;
@@ -47,14 +55,30 @@ box-sizing:inherit;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
 
-
+  .just{
+    text-align: justify;
+  }
   .hidden{
     display: none;
   }
 .tabC{
   color: black;
 }
-
+/* top10 */
+#listpicture{
+  max-height: 30vh;
+  border-radius: 5px;
+}
+.title{
+  font-size: 24px;
+  font-weight: bold;
+}
+.right{
+  text-align: right;
+}
+.details{
+  font-size: 10px;
+}
 /* toptenlist */
 .toptenlist{
 }
@@ -62,12 +86,18 @@ box-sizing:inherit;
   background: white;
   border-radius: 8px;
   color: black;
+  text-align:center;
 }
 .whole{
   width: 100%;
 }
 
 /* toptenitem */
+.count{
+  max-width: 25%;
+  font-size: 40px;
+  color:#940000;
+}
 .toptenitem{
   height: auto;
   width: 100%;
@@ -78,12 +108,10 @@ box-sizing:inherit;
   color: black;
 }
 .toptenitempic{
-  max-height: 100%;
-  max-width: 100%;
+  max-width: 30%;
 }
 .toptenitemimage{
-  max-height: 30vh;
-  min-width: 15vw;
+  width: 70%;
   border-radius: 6px;
 }
 .itemPicColumn{
@@ -91,9 +119,12 @@ box-sizing:inherit;
   width: 100%;
 }
 .toptenitemdesc{
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 24vh;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px #bfbdbd solid;
+}
+.list-detail{
+  border-top: 1px #cccccc solid;
 }
 .cm-section{
   width: 100%;
@@ -103,13 +134,12 @@ box-sizing:inherit;
 .vote-section{
   height: 6vh;
   display: inline-block;
-  width: 23%;
+  width: 34%;
 }
 .input-group{
   height: 6vh;
   display: inline-block;
-  width: 76%;
-  display: inline-block;
+  width: 60%;
   vertical-align: top;
   margin: 0 !important;
 }
@@ -157,7 +187,6 @@ box-sizing:inherit;
 
 .user-cred{
   height: 10%;
-  width: 15%;
 }
 .userpic{
   border-radius: 50%;
@@ -166,14 +195,16 @@ box-sizing:inherit;
 }
 .cmwhole{
     border-bottom: 1px gray solid;
+    padding: 5px;
 }
 .cmbody{
   width: 85%;
+  max-height: 78%;
 }
 .cmcontent{
 }
 .cmtool{
-  width: 10%;
+  width: 8%;;
   float: left;
 }
 .like{
@@ -193,10 +224,13 @@ box-sizing:inherit;
   background: linear-gradient(135deg, #ad0303, #ed0202);
 }
 .likebtn{
-width: 60%;
+width: auto;
+}
+.likebtn:hover{
+  color: white !important;
 }
 .deletebtn{
-min-width: 38%;
+min-width: 28%;
 }
 .editbtn{
   color: white;
@@ -319,10 +353,6 @@ height: 100%;
 min-width: 14vw;
 height: 6vh;
 }
-.title{
-  font-size: 24px;
-  font-weight: bold;
-}
 .btntxt{
   font-family: Gandom;
   font-size: 10px;
@@ -339,4 +369,14 @@ height: 6vh;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   color: black;
+}
+
+/* media */
+@media screen and (max-width: 991px){
+.add-item-btn{
+  width: 40vw;
+}
+.cmtool{
+  width:17%;
+}
 }

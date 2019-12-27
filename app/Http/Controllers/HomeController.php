@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\UploadFile;
 use App\Top10;
+use App\Userpic;
 use JavaScript;
 use View;
 
@@ -64,23 +65,52 @@ class HomeController extends Controller
                           $hooplas[4]->description,
                         ]
                       ]);
-      return View::make('pages.home',['top10s'=>$top10s,
-      'images'=>$images,
-      'hooplas'=>$hooplas,
-      'hoopla_images'=>$hoopla_images,
-      'js10titles'=>[$hooplas[0]->title,
-                          $hooplas[1]->title,
-                          $hooplas[2]->title,
-                          $hooplas[3]->title,
-                          $hooplas[4]->title
-                        ],
-                        'js10descs'=>[
-                          $hooplas[0]->description,
-                          $hooplas[1]->description,
-                          $hooplas[2]->description,
-                          $hooplas[3]->description,
-                          $hooplas[4]->description,
-                        ]
-      ]);
+      if($user = Auth::user()){
+        $userpic=Userpic::where('user_id',$user->id)->get();
+        return View::make('pages.home',['username'=>$user->name,
+        'userpic'=>$userpic,
+        'top10s'=>$top10s,
+        'images'=>$images,
+        'hooplas'=>$hooplas,
+        'hoopla_images'=>$hoopla_images,
+        'js10titles'=>[$hooplas[0]->title,
+                            $hooplas[1]->title,
+                            $hooplas[2]->title,
+                            $hooplas[3]->title,
+                            $hooplas[4]->title
+                          ],
+                          'js10descs'=>[
+                            $hooplas[0]->description,
+                            $hooplas[1]->description,
+                            $hooplas[2]->description,
+                            $hooplas[3]->description,
+                            $hooplas[4]->description,
+                          ]
+        ]);
+      }
+      else{
+        $user = User::find(1000);
+        $userpic=Userpic::where('user_id',$user->id)->get();
+        return View::make('pages.home',['username'=>$user->name,
+        'userpic'=>$userpic,
+        'top10s'=>$top10s,
+        'images'=>$images,
+        'hooplas'=>$hooplas,
+        'hoopla_images'=>$hoopla_images,
+        'js10titles'=>[$hooplas[0]->title,
+                            $hooplas[1]->title,
+                            $hooplas[2]->title,
+                            $hooplas[3]->title,
+                            $hooplas[4]->title
+                          ],
+                          'js10descs'=>[
+                            $hooplas[0]->description,
+                            $hooplas[1]->description,
+                            $hooplas[2]->description,
+                            $hooplas[3]->description,
+                            $hooplas[4]->description,
+                          ]
+        ]);
+      }
   }
 }

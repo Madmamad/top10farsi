@@ -30,7 +30,10 @@ Route::post('/comment/delete','CommentController@delete');
 Auth::routes();
 // $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 //    $this->post('login', 'Auth\LoginController@login');
-//    $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+//profile
+Route::get('/user/profile', 'ProfileController@show');
+Route::post('/user/edit', 'ProfileController@edit');
 //
 //    // Registration Routes...
 //    $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');

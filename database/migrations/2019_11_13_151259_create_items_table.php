@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
           $table->bigIncrements('id');
           $table->string('title');
           $table->longText('description');
+          $table->longText('user_name');
           $table->integer('top10_id');
           $table->integer('user_id')->unsigned();
           $table->integer('votes')->default(0);

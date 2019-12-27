@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Userpic;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Library\Services\FileService\MyFileHandlerInterface;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+
+class RegisterController extends Controller implements MyFileHandlerInterface
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,15 +33,16 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
+    protected $file_handler;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(MyFileHandlerInterface $file_handler)
     {
         $this->middleware('guest');
+        $this->file_handler = $file_handler;
     }
 
     /**
@@ -50,8 +56,19 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed'
         ]);
+    }
+
+    public function loadf()
+    {
+
+    }
+
+    public function storef($file)
+    {
+      $mypath = $file->store('public/photos');
+      return $mypath;
     }
 
     /**
@@ -60,12 +77,25 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create (array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+        ]);
+    }
+    protected function registered(Request $request, $user)
+    {
+        if($request->file('image')){
+          $path  = $this->file_handler->storef($request->file('image'));
+        }
+        else {
+          $path=env('DEFAULT_PICTURE','default_value');
+        }
+        Userpic::create([
+            'address' => $path,
+            'user_id' => $user->id,
         ]);
     }
 }

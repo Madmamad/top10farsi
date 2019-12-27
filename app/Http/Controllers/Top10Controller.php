@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Library\Services\FileService\MyFileHandlerInterface;
 use Illuminate\Support\Facades\Storage;
@@ -12,12 +12,15 @@ use App\Item;
 use App\Comment;
 use App\User;
 use App\like;
+use App\Userpic;
 
 class Top10Controller extends Controller
 {
     //
     public function create(){
-      return View('pages.add-top10');
+        $user=Auth::user();
+        $userpic=Userpic::where('user_id',$user->id)->get();
+        return View('pages.add-top10',['userpic'=>$userpic,'username'=>$user->name]);
     }
 
     public function store(MyFileHandlerInterface $file_handler,Request $request){
@@ -49,13 +52,24 @@ class Top10Controller extends Controller
         ->get();
         $images = UploadFile::where('list_id', $id)->where('type','item_image')->get();
         $pic=UploadFile::where('list_id', $id)->where('type','list_image')->get();
+        $hooplas=Top10::orderBy('updated_at', 'desc')->take(8)->get();
         $comments=$list->comments;
         $top10=$list->title;
-        $user=User::find($list->user_id);
         $date=$list->created_at;
         $desc=$list->description;
         $likes=like::where('user', $user->id)->get();
+        if($user=Auth::user()){
+          $usercomments=$comments->where('user_id',$user->id);
+          $userpic=Userpic::where('user_id',$user->id)->get();
+          return view('pages.top10', ['usercomments'=>$usercomments,'userpic'=>$userpic,'username'=>$user->name,'hooplas'=>$hooplas,'list'=>$id,'items' => $items,'images'=>$images ,'picture'=>$pic ,'id'=>$id , 'comments'=>$comments,'top10'=>$top10,'user'=>$user->name,
+          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes]);
+        }
+        else{
+          $user = User::find(1000);
+          $userpic=Userpic::where('user_id',$user->id)->get();
+          return view('pages.top10', ['userpic'=>$userpic,'username'=>$user->name,'hooplas'=>$hooplas,'list'=>$id,'items' => $items,'images'=>$images ,'picture'=>$pic ,'id'=>$id , 'comments'=>$comments,'top10'=>$top10,'user'=>$user->name,
+          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes]);
+        }
         //view
-        return view('pages.top10', ['list'=>$id,'items' => $items,'images'=>$images , 'id'=>$id , 'comments'=>$comments,'top10'=>$top10,'user'=>$user->name,'date'=>$date ,'desc'=>$desc , 'likes'=>$likes]);
     }
 }

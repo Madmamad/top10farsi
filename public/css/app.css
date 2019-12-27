@@ -7,6 +7,18 @@
  */
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@font-face {
+    font-family: gandom;
+    src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot');
+    src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot?#iefix') format('embedded-opentype'),
+         url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.woff') format('woff'),
+         url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.ttf') format('truetype');
+    font-weight: normal;
+  }
+
+  #app{
+    font-family: gandom;
+  }
 
 html {
   font-family: sans-serif;
@@ -8332,4 +8344,3 @@ button.close {
     display: none !important;
   }
 }
-

@@ -1,23 +1,49 @@
 <script type="text/javascript">
 // mohamad if liked should disable
+var likable=true;
+var votable=true;
+var deletable=true;
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     jQuery(document).ready(function(){
       @foreach($likes as $like)
         @foreach($comments as $comment)
           @if($like->comment==$comment->id)
             $('#likebtn'+{{$comment->id}}).attr('data-like','unlike');
+            $('#likelink'+{{$comment->id}}).attr('data-like','unlike');
+            $('#cmlikes'+{{$comment->id}}).attr('data-like','unlike');
+            $('#likebtn'+{{$comment->id}}).removeClass('btn-outline-primary');
+            $('#likebtn'+{{$comment->id}}).addClass('btn-primary');
+            $('#likebtn'+{{$comment->id}}).css('color','white');
             console.log("comment"+{{$comment->id}});
             // disablelike({{$like->comment}});
           @endif
         @endforeach
       @endforeach
-      $.ajaxSetup({
-
-          headers: {
-
-              // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-          }
-
+      @foreach($usercomments as $usercomment)
+        $('#deletebtn'+{{$usercomment->id}}).addClass('deletable');
+        $('#deletebtn'+{{$usercomment->id}}).removeClass('btn-outline-secondary');
+        $('#deletebtn'+{{$usercomment->id}}).addClass('btn-danger');
+        $('#deletelink'+{{$usercomment->id}}).addClass('deletable');
+      @endforeach
+      $(".likebtn").click(function(){
+        if(likable){
+          likable=false;
+          actOnLike(event);
+        }
+      });
+      $(".voteButton").click(function(){
+      actOnVote(event);
+      });
+      $(".deletebtn").click(function(){
+        if(deletable){
+          deletable=false;
+          console.log(" begin deleting ");
+          actOnDelete(event);
+        }
       });
         });
 
@@ -44,17 +70,10 @@ var list={{$list}};
                 console.log(" begin deleting ");
                 actOnDelete(event);
               });
-              $(".likebtn").click(function(){
-                actOnLike(event);
-              });
               // para.appendChild(node);
               // location.reload();
-
           }
         });
-});
-$(".voteButton").click(function(){
-actOnVote(event);
 });
  function updateVoteStats(action,itemId){
    switch(action) {
@@ -90,12 +109,10 @@ actOnVote(event);
      // axios.post('/item/' + itemId + '/vote',
      //     { action: action });
  };
- $(".likebtn").click(function(){
-   actOnLike(event);
- });
  var actOnLike = function (event) {
      var comment = event.target.dataset.comment;
      var action = event.target.dataset.like;
+     console.log("was it thought? cuz it's " + action);
      jQuery.ajax({
              url: "{{ url('/like') }}",
              method: 'post',
@@ -104,6 +121,7 @@ actOnVote(event);
                comment:comment,
              },
              success: function(result){
+               console.log("successful like!!");
                updateLikeStats(action,comment);
              }
            });
@@ -112,11 +130,26 @@ actOnVote(event);
              switch(action) {
                case "like":
                  document.querySelector('#cmlikes' + comment).textContent++;
-                 $('#likebtn'+comment).attr('data-like', 'unlike');
+                 $('#likebtn'+comment).attr('data-like','unlike');
+                 $('#likelink'+comment).attr('data-like','unlike');
+                 $('#cmlikes'+comment).attr('data-like','unlike');
+                 $('#likebtn'+comment).removeClass('btn-outline-primary');
+                 $('#likebtn'+comment).addClass('btn-primary');
+                 $('#likebtn'+comment).css('color','white');
+                 likable=true;
+                 var a = $('#likebtn'+comment).data('like');
+                 console.log("like of"+comment + "  is  " + a);
                  break;
                case "unlike":
                  document.querySelector('#cmlikes' + comment).textContent--;
-                 $('#likebtn'+comment).attr('data-like', 'like');
+                 $('#likebtn'+comment).attr('data-like','like');
+                 $('#likelink'+comment).attr('data-like','like');
+                 $('#cmlikes'+comment).attr('data-like','like');
+                 $('#likebtn'+comment).removeClass('btn-primary');
+                 $('#likebtn'+comment).addClass('btn-outline-primary');
+                 $('#likebtn'+comment).css('color','#007BFF');
+                 likable=true;
+                 console.log("unlike "+comment + "  ??  " + action);
                  break;
                default:
                  console.log("Da FUCK!? "+comment + "  ??  " + action);
@@ -130,26 +163,29 @@ actOnVote(event);
      // axios.post('/item/' + itemId + '/vote',
      //     { action: action });
  // };
- $(".deletebtn").click(function(){
-   console.log(" begin deleting ");
-   actOnDelete(event);
- });
  var actOnDelete = function (event) {
- var comment = event.target.dataset.comment;
- console.log("deleting "+comment);
- jQuery.ajax({
-         url: "{{ url('/comment/delete') }}",
-         method: 'post',
-         data: {
-           comment:comment,
-         },
-         success: function(result){
-           console.log("deleted");
-           deleteComment(comment);
+        var comment = event.target.dataset.comment;
+         if($(event.target).hasClass("deletable")){
+           console.log("deleting "+comment);
+           jQuery.ajax({
+                   url: "{{ url('/comment/delete') }}",
+                   method: 'post',
+                   data: {
+                     comment:comment,
+                   },
+                   success: function(result){
+                     console.log("deleted");
+                     deleteComment(comment);
+                   }
+                 });
          }
-       });
+         else{
+           console.log("undeletable "+comment);
+           deletable=true;
+         }
      };
      function deleteComment(id){
+       deletable=true;
        $( "#cmwhole"+id ).remove();
      }
 </script>

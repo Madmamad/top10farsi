@@ -9,7 +9,7 @@ class Item extends Model
     //
     protected $guarded = [];
 
-    protected $fillable = ['title','description','user_id','top10_id'];
+    protected $fillable = ['title','description','user_id','top10_id','user_name'];
 
     public function comments(){
         return $this->hasMany('App\Comment');

@@ -48,4 +48,8 @@ class User extends Authenticatable
     return $this->hasMany('App\Item');
   }
 
+  public function userpic(){
+    return $this->hasOne('App\Userpic');
+  }
+
 }

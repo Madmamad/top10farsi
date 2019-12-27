@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\UploadFile;
 use App\Top10;
 use App\Item;
+use App\Userpic;
 
 class ItemController extends Controller
 {
@@ -16,7 +17,9 @@ class ItemController extends Controller
     public function create($id)
     {
         $list=Top10::find($id);
-        return view('pages.add-item',["list"=>$list]);
+        $user=Auth::user();
+        $userpic=Userpic::where('user_id',$user->id)->get();
+        return view('pages.add-item',["list"=>$list,'userpic'=>$userpic,'username'=>$user->name]);
     }
 
     public function store(MyFileHandlerInterface $file_handler,Request $request,$id)
@@ -33,7 +36,8 @@ class ItemController extends Controller
         Item::create(['title'=>$request->title,
                   'description'=>$request->description,
                   'top10_id'=>$id,
-                  'user_id'=>$user->id
+                  'user_id'=>$user->id,
+                  'user_name'=>$user->name
           ]);
         $mypath=  $file_handler->storef($request->file('image'));
         $item_id=Item::latest()->value('id');
@@ -53,14 +57,14 @@ class ItemController extends Controller
     public function actOnVote(Request $request){
       $action = $request->action;
       $id=$request->item;
-    switch ($action) {
-        case 'vote':
-            Item::where('id', $id)->increment('votes');
-            break;
-        case 'unvote':
-            Item::where('id', $id)->decrement('votes');
-            break;
-    }
+        switch ($action) {
+            case 'vote':
+                Item::where('id', $id)->increment('votes');
+                break;
+            case 'unvote':
+                Item::where('id', $id)->decrement('votes');
+                break;
+        }
     return response()->json(['success'=>"yes"]);
     }
 }

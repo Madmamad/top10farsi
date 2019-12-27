@@ -1,8 +1,8 @@
 @extends('layouts.home')
 @section('home-page')
-<div class="page row m-0 p-0 pr-2 gandom">
-  <div class="col-lg-9 col-md-pull-3 pl-4 mt-2" id="mainsection">
-    <div class="container-fluid" id="bigsection">
+<div class="page row m-0 p-0 pt-1 pr-2 gandom">
+  <div class="col-lg-9 pl-4 mt-2" id="mainsection">
+    <div class="container-fluid material-box" id="bigsection">
       <div class="row text-center" id="hotTopicRow">
         <div class="col-lg-6 p-0 m-0" id="carousel-column">
           <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
@@ -48,17 +48,17 @@
 
           </div>
         </div>
-        <div class="col-lg-6 pt-1 pr-5 pl-5" id="description-column">
+        <div class="col-lg-6 pt-4 pr-5 pl-5" id="description-column">
           <div class="" id="item-desc">
             <h1 id="title-content" class="animated">{{$hooplas[4]->title}}</h1>
-            <p id="desc-content" class="animated">{{$hooplas[4]->description}}</p>
+            <p id="desc-content" class="animated mt-5 just">{{$hooplas[4]->description}}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="container-fluid mt-1 mr-2 p-0" id="doublesection">
       <div class="row pt-0 pb-3 pr-3" id="doublesectionrow">
-        <div class="col-lg-5 m-0 p-0 pr-1" align="center" id="newTopic">
+        <div class="col-lg-5 m-0 p-0 pr-1 material-box" align="center" id="newTopic">
           <div class="m-0 p-0 row" id="newTopicBackground">
             <div class="mt-0" id="newTopicCaption">
               <h4>{{$hooplas[4]->title}}</h4>
@@ -84,7 +84,7 @@
       </div>
     </div>
   </div>
-  <div class="right col-lg-3 col-md-push-9 m-0 p-2">
+  <div class="right col-lg-3 order-lg-first m-0 p-2">
     <div class="list">
         <ul class="list-list m-0 p-0">
           @foreach ($top10s as $top10)

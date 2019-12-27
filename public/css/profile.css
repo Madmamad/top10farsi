@@ -1,0 +1,47 @@
+@font-face {
+    font-family: gandom;
+    src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot');
+    src: url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.eot?#iefix') format('embedded-opentype'),
+         url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.woff') format('woff'),
+         url('http://fonts.codearena.ir/rastikerdar/gandom/gandom.ttf') format('truetype');
+    font-weight: normal;
+  }
+
+/* navbar */
+#navbarred{
+  /* background-color: #ff2845; */
+  /* background-color: #7d0b73; */
+  /* background-color: #563D7C; */
+  /* background-color: #41197C; */
+  background-color:#010d52;
+}
+.navbar-user-pic{
+  height: 5vh;
+  border-radius: 50%;
+}
+.navbar-user-name{
+  color: white;
+}
+.page{
+  text-align: center;
+  font-family: gandom;
+  font-size: 12px;
+}
+.userpic{
+  display: inline-block;
+}
+.userimage{
+  height: 30vh;
+}
+.bold{
+  font-weight: bold;
+}
+.hidden{
+  display: none;
+}
+.lable{
+  background-color: #007BFF;
+  border-radius: 2px;
+  color:white;
+  padding: 5px;
+}

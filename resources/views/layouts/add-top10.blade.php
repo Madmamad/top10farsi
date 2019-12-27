@@ -1,5 +1,6 @@
 </<!DOCTYPE html>
 <html lang="fa" dir="rtl">
+<meta name="csrf-token" content="{{ csrf_token() }}">
   <head>
     @include('includes.all')
     @include('includes.add-top10')
@@ -8,12 +9,21 @@
   </head>
   <body>
     <div class="container-fluid m-0 p-0">
-      @include('includes.topbar-default')
+      @if (auth()->guest())
+        @include('includes.topbar-default')
+      @else
+        @include('includes.topbar-user')
+      @endif
       @yield('add-top10-page')
     </div>
     <script type="text/javascript">
     $(document).ready(function() {
   $('.categories').select2();
+});
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
     </script>
   </body>
