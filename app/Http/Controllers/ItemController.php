@@ -10,6 +10,8 @@ use App\UploadFile;
 use App\Top10;
 use App\Item;
 use App\Userpic;
+use App\vote;
+use Log;
 
 class ItemController extends Controller
 {
@@ -57,12 +59,47 @@ class ItemController extends Controller
     public function actOnVote(Request $request){
       $action = $request->action;
       $id=$request->item;
+      $list=$request->list;
+      $withdraw=$request->withdraw;
+      $user=Auth::user();
+      $double=$request->double;
+      Log::info('withdrawal is '. $withdraw . ' the vote is '.$action);
         switch ($action) {
             case 'vote':
-                Item::where('id', $id)->increment('votes');
+                if($withdraw=='false'){
+                  Item::where('id', $id)->increment('votes');
+                  $vote = vote::create(['list' => $list,'item'=>$id,'user'=>$user->id]);
+                  $vote->thevote='plus';
+                  $vote->save();
+                  Log::info('double is '.$double);
+                  if($double==false){
+                    Log::info('doubled');
+                    Item::where('id', $id)->increment('votes');
+                    vote::where('item', $id)->where('user',$user->id)->where('thevote','minus')->delete();
+                  }
+                }
+                else{
+                  Log::info('shit is where it shouldnt be');
+                  Item::where('id', $id)->decrement('votes');
+                  vote::where('item', $id)->where('user',$user->id)->delete();
+                }
                 break;
             case 'unvote':
-                Item::where('id', $id)->decrement('votes');
+                if($withdraw=='false'){
+                  Item::where('id', $id)->decrement('votes');
+                  $vote = vote::create(['list' => $list,'item'=>$id,'user'=>$user->id]);
+                  $vote->thevote='minus';
+                  $vote->save();
+                  if($double==false){
+                    Log::info('doubled');
+                    Item::where('id', $id)->decrement('votes');
+                    vote::where('item', $id)->where('user',$user->id)->where('thevote','plus')->delete();
+                  }
+                }
+                else{
+                  Item::where('id', $id)->increment('votes');
+                  vote::where('item', $id)->where('user',$user->id)->delete();
+                }
                 break;
         }
     return response()->json(['success'=>"yes"]);

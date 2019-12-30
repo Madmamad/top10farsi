@@ -18,6 +18,8 @@ class CreateVotesTable extends Migration
             $table->timestamps();
             $table->integer('user');
             $table->integer('item');
+            $table->enum('thevote', ['plus', 'minus']);
+            $table->integer('list');
         });
     }
 

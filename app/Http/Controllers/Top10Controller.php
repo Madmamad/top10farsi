@@ -13,6 +13,7 @@ use App\Comment;
 use App\User;
 use App\like;
 use App\Userpic;
+use App\vote;
 
 class Top10Controller extends Controller
 {
@@ -45,7 +46,6 @@ class Top10Controller extends Controller
     public function show($id){
       //get items and item images and list image
         $list=Top10::find($id);
-        $user=Auth::user();
         $items = Item::with('author')
         ->orderBy('votes', 'desc')
         ->where('top10_id',$id)
@@ -57,18 +57,22 @@ class Top10Controller extends Controller
         $top10=$list->title;
         $date=$list->created_at;
         $desc=$list->description;
-        $likes=like::where('user', $user->id)->get();
         if($user=Auth::user()){
+          $likes=like::where('user', $user->id)->get();
+          $guest=false;
           $usercomments=$comments->where('user_id',$user->id);
           $userpic=Userpic::where('user_id',$user->id)->get();
+          $votes=vote::where('user',$user->id)->where('list',$id)->get();
           return view('pages.top10', ['usercomments'=>$usercomments,'userpic'=>$userpic,'username'=>$user->name,'hooplas'=>$hooplas,'list'=>$id,'items' => $items,'images'=>$images ,'picture'=>$pic ,'id'=>$id , 'comments'=>$comments,'top10'=>$top10,'user'=>$user->name,
-          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes]);
+          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes,'guest'=>$guest,'votes'=>$votes]);
         }
         else{
           $user = User::find(1000);
+          $likes=like::where('user', $user->id)->get();
+          $guest=true;
           $userpic=Userpic::where('user_id',$user->id)->get();
           return view('pages.top10', ['userpic'=>$userpic,'username'=>$user->name,'hooplas'=>$hooplas,'list'=>$id,'items' => $items,'images'=>$images ,'picture'=>$pic ,'id'=>$id , 'comments'=>$comments,'top10'=>$top10,'user'=>$user->name,
-          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes]);
+          'date'=>$date ,'desc'=>$desc , 'likes'=>$likes ,'guest'=>$guest]);
         }
         //view
     }

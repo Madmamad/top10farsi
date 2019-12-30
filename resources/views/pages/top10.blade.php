@@ -51,9 +51,9 @@
         </div>
         <div class="comment-input p-0 m-0 row cm-section">
           <span class="p-2 m-0 vote-section">
-            <div class="button plus voteButton" data-vote="vote" data-item="{{$item->id}}" id="voter{{$item->id}}"><span class="glyphicon glyphicon-plus pt-2" data-vote="vote" data-item="{{$item->id}}" style="color:green;"></span></div>
+            <div class="button plus voteButton" data-vote="vote" data-item="{{$item->id}}" id="voter{{$item->id}}" data-already="false"><span class="glyphicon glyphicon-plus pt-2" data-vote="vote" data-item="{{$item->id}}" data-already="false" id="votericon{{$item->id}}" ></span></div>
             <p class="vote" id="votesof{{$item->id}}">{{$item->votes}}</p>
-            <div class="button minus voteButton" data-vote="unvote" data-item="{{$item->id}}" id="unvoter{{$item->id}}"> <span class="glyphicon glyphicon-minus pt-2" data-vote="unvote" data-item="{{$item->id}}"></span></div>
+            <div class="button minus voteButton" data-vote="unvote" data-item="{{$item->id}}" id="unvoter{{$item->id}}" data-already="false"> <span class="glyphicon glyphicon-minus pt-2" data-vote="unvote" data-item="{{$item->id}}" data-already="false" id="unvotericon{{$item->id}}"></span></div>
           </span>
           <span class="input-group p-1 cmm-section">
             <form class="myForm" action="index.html" method="post">
